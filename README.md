@@ -1,6 +1,6 @@
 # API de tareas
 
-API REST ligera en Java 21 y Spring Boot para gestionar tareas. La persistencia se mantiene en memoria, por lo que los datos se pierden al detener la aplicacion.
+API REST ligera y practica en Java 21 y Spring Boot para gestionar tareas. La persistencia se mantiene en memoria, por lo que los datos se pierden al detener la aplicacion.
 
 ## Requisitos
 
