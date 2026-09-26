@@ -9,6 +9,7 @@ import es.maxih.tareas.domain.TaskDraft;
 import es.maxih.tareas.domain.TaskStatus;
 import es.maxih.tareas.repository.InMemoryTaskRepository;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,17 @@ class TaskServiceTest {
   @Test
   void failsWhenDeletingMissingTask() {
     assertThrows(TaskNotFoundException.class, () -> service.delete(UUID.randomUUID()));
+  }
+
+  @Test
+  void findsOnlyTasksWithRequestedStatus() {
+    service.create(draft("Pendiente", TaskStatus.PENDING, 2));
+    service.create(draft("En curso", TaskStatus.IN_PROGRESS, 3));
+
+    List<Task> tasks = service.findByStatus(TaskStatus.IN_PROGRESS);
+
+    assertEquals(1, tasks.size());
+    assertEquals("En curso", tasks.getFirst().title());
   }
 
   private TaskDraft draft(String title, TaskStatus status, int priority) {
