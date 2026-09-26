@@ -23,6 +23,13 @@ public class TaskService {
     return repository.findAll().stream().sorted(Comparator.comparing(Task::dueDate)).toList();
   }
 
+  public List<Task> findByStatus(TaskStatus status) {
+    return repository.findAll().stream()
+        .filter(task -> task.status() == status)
+        .sorted(Comparator.comparing(Task::dueDate))
+        .toList();
+  }
+
   public Task findById(UUID id) {
     return repository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
   }

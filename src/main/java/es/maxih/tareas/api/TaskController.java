@@ -2,6 +2,7 @@ package es.maxih.tareas.api;
 
 import es.maxih.tareas.domain.Task;
 import es.maxih.tareas.domain.TaskDraft;
+import es.maxih.tareas.domain.TaskStatus;
 import es.maxih.tareas.service.TaskService;
 import jakarta.validation.Valid;
 import java.net.URI;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,8 +30,8 @@ public class TaskController {
   }
 
   @GetMapping
-  public List<Task> findAll() {
-    return service.findAll();
+  public List<Task> findAll(@RequestParam(required = false) TaskStatus status) {
+    return status == null ? service.findAll() : service.findByStatus(status);
   }
 
   @GetMapping("/{id}")

@@ -22,7 +22,7 @@ curl -i -X POST http://localhost:8080/api/tasks \
   -d '{"title":"Preparar boletin","description":"Completar Git y Maven","status":"PENDING","priority":3,"dueDate":"2026-10-02"}'
 ```
 
-Los endpoints disponibles son `GET /api/tasks`, `GET /api/tasks/{id}`, `POST /api/tasks`, `PUT /api/tasks/{id}` y `DELETE /api/tasks/{id}`. Una tarea inexistente devuelve `404`; los datos invalidos devuelven `400` con un detalle del error.
+Los endpoints disponibles son `GET /api/tasks`, `GET /api/tasks?status=PENDING`, `GET /api/tasks/{id}`, `POST /api/tasks`, `PUT /api/tasks/{id}` y `DELETE /api/tasks/{id}`. Una tarea inexistente devuelve `404`; los datos invalidos devuelven `400` con un detalle del error.
 
 ## Formato y hook de Git
 
