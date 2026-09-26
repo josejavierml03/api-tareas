@@ -33,21 +33,24 @@ class TaskServiceTest {
 
   @Test
   void rejectsDueDateInThePast() {
-    TaskDraft invalid = new TaskDraft("Entregar", null, TaskStatus.PENDING, 2, LocalDate.now().minusDays(1));
+    TaskDraft invalid =
+        new TaskDraft("Entregar", null, TaskStatus.PENDING, 2, LocalDate.now().minusDays(1));
 
     assertThrows(TaskValidationException.class, () -> service.create(invalid));
   }
 
   @Test
   void rejectsBlankTitle() {
-    TaskDraft invalid = new TaskDraft("   ", null, TaskStatus.PENDING, 2, LocalDate.now().plusDays(1));
+    TaskDraft invalid =
+        new TaskDraft("   ", null, TaskStatus.PENDING, 2, LocalDate.now().plusDays(1));
 
     assertThrows(TaskValidationException.class, () -> service.create(invalid));
   }
 
   @Test
   void rejectsPriorityOutsideAllowedRange() {
-    TaskDraft invalid = new TaskDraft("Revisar", null, TaskStatus.PENDING, 6, LocalDate.now().plusDays(1));
+    TaskDraft invalid =
+        new TaskDraft("Revisar", null, TaskStatus.PENDING, 6, LocalDate.now().plusDays(1));
 
     assertThrows(TaskValidationException.class, () -> service.create(invalid));
   }

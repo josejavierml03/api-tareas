@@ -19,11 +19,12 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler({TaskValidationException.class, MethodArgumentNotValidException.class})
   ProblemDetail handleBadRequest(Exception exception) {
-    String detail = exception instanceof MethodArgumentNotValidException validationException
-        ? validationException.getBindingResult().getFieldErrors().stream()
-            .map(error -> error.getField() + ": " + error.getDefaultMessage())
-            .collect(Collectors.joining(", "))
-        : exception.getMessage();
+    String detail =
+        exception instanceof MethodArgumentNotValidException validationException
+            ? validationException.getBindingResult().getFieldErrors().stream()
+                .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                .collect(Collectors.joining(", "))
+            : exception.getMessage();
     return problem(HttpStatus.BAD_REQUEST, "Peticion no valida", detail);
   }
 
