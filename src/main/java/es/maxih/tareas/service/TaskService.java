@@ -7,6 +7,7 @@ import es.maxih.tareas.repository.TaskRepository;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,11 @@ public class TaskService {
     this.repository = repository;
   }
 
-  public List<Task> findAll() {
-    return repository.findAll().stream().sorted(Comparator.comparing(Task::dueDate)).toList();
-  }
-
-  public List<Task> findByStatus(TaskStatus status) {
+  public List<Task> findAll(TaskStatus status, String query) {
+    String needle = normalize(query);
     return repository.findAll().stream()
-        .filter(task -> task.status() == status)
+        .filter(task -> status == null || task.status() == status)
+        .filter(task -> matches(task, needle))
         .sorted(Comparator.comparing(Task::dueDate))
         .toList();
   }
@@ -52,6 +51,21 @@ public class TaskService {
     if (!repository.deleteById(id)) {
       throw new TaskNotFoundException(id);
     }
+  }
+
+  private String normalize(String query) {
+    return query == null ? "" : query.trim().toLowerCase(Locale.ROOT);
+  }
+
+  private boolean matches(Task task, String needle) {
+    if (needle.isEmpty()) {
+      return true;
+    }
+    return contains(task.title(), needle) || contains(task.description(), needle);
+  }
+
+  private boolean contains(String text, String needle) {
+    return text != null && text.toLowerCase(Locale.ROOT).contains(needle);
   }
 
   private void validate(TaskDraft draft) {
