@@ -30,8 +30,10 @@ public class TaskController {
   }
 
   @GetMapping
-  public List<Task> findAll(@RequestParam(required = false) TaskStatus status) {
-    return status == null ? service.findAll() : service.findByStatus(status);
+  public List<Task> findAll(
+      @RequestParam(required = false) TaskStatus status,
+      @RequestParam(name = "q", required = false) String query) {
+    return service.findAll(status, query);
   }
 
   @GetMapping("/{id}")

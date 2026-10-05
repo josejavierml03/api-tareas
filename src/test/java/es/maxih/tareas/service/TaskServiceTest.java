@@ -85,13 +85,87 @@ class TaskServiceTest {
     service.create(draft("Pendiente", TaskStatus.PENDING, 2));
     service.create(draft("En curso", TaskStatus.IN_PROGRESS, 3));
 
-    List<Task> tasks = service.findByStatus(TaskStatus.IN_PROGRESS);
+    List<Task> tasks = service.findAll(TaskStatus.IN_PROGRESS, null);
 
     assertEquals(1, tasks.size());
     assertEquals("En curso", tasks.getFirst().title());
   }
 
+  @Test
+  void findsTasksByTitleIgnoringCase() {
+    service.create(draft("Preparar el boletin", TaskStatus.PENDING, 2));
+    service.create(draft("Comprar cafe", TaskStatus.PENDING, 3));
+
+    List<Task> tasks = service.findAll(null, "BOLETIN");
+
+    assertEquals(1, tasks.size());
+    assertEquals("Preparar el boletin", tasks.getFirst().title());
+  }
+
+  @Test
+  void findsTasksByDescription() {
+    service.create(task("Revisar codigo", "Mirar el apartado de boletin"));
+    service.create(task("Comprar cafe", null));
+
+    List<Task> tasks = service.findAll(null, "apartado de boletin");
+
+    assertEquals(1, tasks.size());
+    assertEquals("Revisar codigo", tasks.getFirst().title());
+  }
+
+  @Test
+  void ignoresSurroundingSpacesInQuery() {
+    service.create(draft("Preparar el boletin", TaskStatus.PENDING, 2));
+
+    assertEquals(1, service.findAll(null, "  boletin  ").size());
+  }
+
+  @Test
+  void returnsEveryTaskWhenQueryIsBlank() {
+    service.create(draft("Preparar el boletin", TaskStatus.PENDING, 2));
+    service.create(draft("Comprar cafe", TaskStatus.PENDING, 3));
+
+    assertEquals(2, service.findAll(null, "   ").size());
+    assertEquals(2, service.findAll(null, null).size());
+  }
+
+  @Test
+  void combinesQueryWithStatus() {
+    service.create(draft("Preparar el boletin", TaskStatus.PENDING, 2));
+    service.create(draft("Cerrar el boletin", TaskStatus.COMPLETED, 3));
+
+    List<Task> tasks = service.findAll(TaskStatus.COMPLETED, "boletin");
+
+    assertEquals(1, tasks.size());
+    assertEquals("Cerrar el boletin", tasks.getFirst().title());
+  }
+
+  @Test
+  void returnsEmptyListWhenNothingMatches() {
+    service.create(draft("Comprar cafe", TaskStatus.PENDING, 2));
+
+    assertEquals(0, service.findAll(null, "boletin").size());
+  }
+
+  @Test
+  void sortsMatchesByDueDate() {
+    service.create(taskWithDueDate(" boletin tardio", LocalDate.now().plusDays(5)));
+    service.create(taskWithDueDate("boletin proximo", LocalDate.now().plusDays(1)));
+
+    List<Task> tasks = service.findAll(null, "boletin");
+
+    assertEquals("boletin proximo", tasks.getFirst().title());
+  }
+
   private TaskDraft draft(String title, TaskStatus status, int priority) {
     return new TaskDraft(title, "Descripcion", status, priority, LocalDate.now().plusDays(7));
+  }
+
+  private TaskDraft task(String title, String description) {
+    return new TaskDraft(title, description, TaskStatus.PENDING, 3, LocalDate.now().plusDays(7));
+  }
+
+  private TaskDraft taskWithDueDate(String title, LocalDate dueDate) {
+    return new TaskDraft(title, null, TaskStatus.PENDING, 3, dueDate);
   }
 }
