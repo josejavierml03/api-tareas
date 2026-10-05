@@ -26,10 +26,19 @@ java -jar target/api-tareas-0.0.1-SNAPSHOT.jar
 
 En otra terminal, crea una tarea:
 
+**Git Bash / Linux:**
+
 ```bash
 curl -i -X POST http://localhost:8080/api/tasks \
   -H 'Content-Type: application/json' \
-  -d '{"title":"Preparar boletin","description":"Completar Git y Maven","status":"PENDING","priority":3,"dueDate":"2026-10-02"}'
+  -d "{\"title\":\"Preparar boletin\",\"description\":\"Completar Git y Maven\",\"status\":\"PENDING\",\"priority\":3,\"dueDate\":\"$(date -d '+7 days' +%F)\"}"
+```
+
+**PowerShell (usa `curl.exe`):**
+
+```powershell
+$d = (Get-Date).AddDays(7).ToString("yyyy-MM-dd")
+curl.exe -i -X POST http://localhost:8080/api/tasks -H "Content-Type: application/json" -d "{\"title\":\"Preparar boletin\",\"description\":\"Completar Git y Maven\",\"status\":\"PENDING\",\"priority\":3,\"dueDate\":\"$d\"}"
 ```
 
 Los endpoints disponibles son `GET /api/tasks`, `GET /api/tasks/{id}`, `POST /api/tasks`, `PUT /api/tasks/{id}` y `DELETE /api/tasks/{id}`. Una tarea inexistente devuelve `404`; los datos invalidos devuelven `400` con un detalle del error.
