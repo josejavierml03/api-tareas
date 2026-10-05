@@ -91,6 +91,19 @@ class TaskServiceTest {
     assertEquals("En curso", tasks.getFirst().title());
   }
 
+  @Test
+  void sortsByPriorityBeforeDueDate() {
+    service.create(
+        new TaskDraft("Urgente tardia", null, TaskStatus.PENDING, 5, LocalDate.now().plusDays(5)));
+    service.create(
+        new TaskDraft("Trivial pronta", null, TaskStatus.PENDING, 1, LocalDate.now().plusDays(1)));
+
+    List<Task> tasks = service.findByStatus(TaskStatus.PENDING);
+
+    assertEquals("Trivial pronta", tasks.getFirst().title());
+    assertEquals("Urgente tardia", tasks.getLast().title());
+  }
+
   private TaskDraft draft(String title, TaskStatus status, int priority) {
     return new TaskDraft(title, "Descripcion", status, priority, LocalDate.now().plusDays(7));
   }

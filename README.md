@@ -34,6 +34,8 @@ curl -i -X POST http://localhost:8080/api/tasks \
 
 Los endpoints disponibles son `GET /api/tasks`, `GET /api/tasks?status=PENDING`, `GET /api/tasks/{id}`, `POST /api/tasks`, `PUT /api/tasks/{id}` y `DELETE /api/tasks/{id}`. Una tarea inexistente devuelve `404`; los datos invalidos devuelven `400` con un detalle del error.
 
+El listado se ordena por prioridad y, a igualdad de prioridad, por fecha limite.
+
 ## Formato y hook de Git
 
 ```bash
