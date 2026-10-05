@@ -7,7 +7,17 @@ API REST ligera y practica en Java 21 y Spring Boot para gestionar tareas. La pe
 - JDK 21
 - Maven 3.9 o posterior
 
-## Ejecutar y comprobar
+## Puesta en marcha
+
+Clona el repositorio e instala el hook de Git antes de empezar a trabajar:
+
+```bash
+git clone https://github.com/josejavierml03/api-tareas.git
+cd api-tareas
+git config core.hooksPath .githooks
+```
+
+Compila, ejecuta los tests y arranca la aplicacion:
 
 ```bash
 mvn clean package
@@ -33,3 +43,7 @@ git config core.hooksPath .githooks
 ```
 
 El hook versionado aplica Spotless antes de cada commit y vuelve a anadir los ficheros reformateados. Debe activarse una vez en cada clon; no sustituye la comprobacion de formato que se incorporara a CI.
+
+## Contribuir
+
+Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para conocer el flujo de ramas, las comprobaciones locales y la politica de Pull Requests.
