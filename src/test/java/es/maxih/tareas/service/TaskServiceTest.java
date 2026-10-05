@@ -160,6 +160,18 @@ class TaskServiceTest {
     assertEquals("Prioridad baja", tasks.get(2).title());
   }
 
+  @Test
+  void sortsEquivalentTasksByTitle() {
+    LocalDate dueDate = LocalDate.now().plusDays(2);
+    service.create(taskWithPriorityAndDueDate("Zeta", 5, dueDate));
+    service.create(taskWithPriorityAndDueDate("Alfa", 5, dueDate));
+
+    List<Task> tasks = service.findAll(null, null);
+
+    assertEquals("Alfa", tasks.get(0).title());
+    assertEquals("Zeta", tasks.get(1).title());
+  }
+
   private TaskDraft draft(String title, TaskStatus status, int priority) {
     return new TaskDraft(title, "Descripcion", status, priority, LocalDate.now().plusDays(7));
   }
