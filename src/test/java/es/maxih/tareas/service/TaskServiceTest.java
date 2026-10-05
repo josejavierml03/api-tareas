@@ -148,13 +148,16 @@ class TaskServiceTest {
   }
 
   @Test
-  void sortsMatchesByDueDate() {
-    service.create(taskWithDueDate(" boletin tardio", LocalDate.now().plusDays(5)));
-    service.create(taskWithDueDate("boletin proximo", LocalDate.now().plusDays(1)));
+  void sortsTasksByPriorityAndDueDate() {
+    service.create(taskWithPriorityAndDueDate("Prioridad baja", 1, LocalDate.now().plusDays(1)));
+    service.create(taskWithPriorityAndDueDate("Alta tardia", 5, LocalDate.now().plusDays(5)));
+    service.create(taskWithPriorityAndDueDate("Alta proxima", 5, LocalDate.now().plusDays(1)));
 
-    List<Task> tasks = service.findAll(null, "boletin");
+    List<Task> tasks = service.findAll(null, null);
 
-    assertEquals("boletin proximo", tasks.getFirst().title());
+    assertEquals("Alta proxima", tasks.get(0).title());
+    assertEquals("Alta tardia", tasks.get(1).title());
+    assertEquals("Prioridad baja", tasks.get(2).title());
   }
 
   private TaskDraft draft(String title, TaskStatus status, int priority) {
@@ -165,7 +168,7 @@ class TaskServiceTest {
     return new TaskDraft(title, description, TaskStatus.PENDING, 3, LocalDate.now().plusDays(7));
   }
 
-  private TaskDraft taskWithDueDate(String title, LocalDate dueDate) {
-    return new TaskDraft(title, null, TaskStatus.PENDING, 3, dueDate);
+  private TaskDraft taskWithPriorityAndDueDate(String title, int priority, LocalDate dueDate) {
+    return new TaskDraft(title, null, TaskStatus.PENDING, priority, dueDate);
   }
 }

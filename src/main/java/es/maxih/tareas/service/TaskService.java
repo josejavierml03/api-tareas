@@ -25,7 +25,7 @@ public class TaskService {
     return repository.findAll().stream()
         .filter(task -> status == null || task.status() == status)
         .filter(task -> matches(task, needle))
-        .sorted(Comparator.comparing(Task::dueDate))
+        .sorted(Comparator.comparingInt(Task::priority).reversed().thenComparing(Task::dueDate))
         .toList();
   }
 
