@@ -7,9 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class InMemoryTaskRepository implements TaskRepository {
 
   private final ConcurrentMap<UUID, Task> tasks = new ConcurrentHashMap<>();
