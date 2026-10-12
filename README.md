@@ -31,6 +31,8 @@ docker compose ps
 
 Compose espera a que PostgreSQL este listo antes de arrancar la API. Esta hereda el healthcheck del Dockerfile. Solo se exponen `health` e `info` de Actuator; el endpoint de salud devuelve `{"status":"UP"}` cuando la API y su base de datos estan listas.
 
+Si los puertos locales estan ocupados, cambia `POSTGRES_PORT` y `API_PORT` en `.env`. Por ejemplo, con `API_PORT=18080` consulta `http://localhost:18080/actuator/health`; con `POSTGRES_PORT=15432` usa ese puerto en la URL del JAR local. Los puertos internos entre los contenedores siguen siendo 5432 y 8080.
+
 `docker compose down` elimina contenedores y red, pero conserva las tareas en el volumen `db-data`. `docker compose down -v` borra tambien el volumen y sus datos. PostgreSQL solo utiliza las credenciales de `.env` al inicializar un volumen nuevo. Para cambiar esas credenciales en desarrollo, elimina el volumen y vuelve a arrancar.
 
 `.env` no se versiona ni se envia al contexto de build. `.env.example` documenta las variables. `docker compose config` muestra la configuracion resuelta, incluida la contraseña; `--quiet` solo la valida.

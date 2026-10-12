@@ -5,7 +5,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-tareas}
       POSTGRES_USER: ${POSTGRES_USER:-app}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en el fichero .env}
-    ports: ["127.0.0.1:5432:5432"]
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5432}:5432"]
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
@@ -17,7 +17,7 @@ services:
   api:
     build: .
     image: tareas-api:0.1
-    ports: ["8080:8080"]
+    ports: ["${API_PORT:-8080}:8080"]
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-tareas}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-app}
