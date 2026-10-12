@@ -43,6 +43,8 @@ curl.exe -i -X POST http://localhost:8080/api/tasks -H "Content-Type: applicatio
 
 Los endpoints disponibles son `GET /api/tasks`, `GET /api/tasks/{id}`, `POST /api/tasks`, `PUT /api/tasks/{id}` y `DELETE /api/tasks/{id}`. Una tarea inexistente devuelve `404`; los datos invalidos devuelven `400` con un detalle del error.
 
+Las validaciones de entrada son: el titulo es obligatorio y admite 255 caracteres como maximo, la descripcion admite 500 caracteres, la prioridad debe estar entre 1 y 5 y la fecha limite no puede ser anterior a hoy.
+
 El listado se ordena por prioridad descendente (de 5 a 1) y, si hay empate, por fecha limite ascendente. Admite dos filtros opcionales que pueden combinarse: `status` acepta `PENDING`, `IN_PROGRESS` o `COMPLETED`, y `q` busca texto en el titulo y en la descripcion sin distinguir mayusculas. Si `q` no llega o llega en blanco no se aplica ningun filtro de texto:
 
 ```bash
