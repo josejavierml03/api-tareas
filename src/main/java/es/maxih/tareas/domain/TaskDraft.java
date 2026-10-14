@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public record TaskDraft(
     @NotBlank(message = "El titulo es obligatorio")
-        @Size(max = 120, message = "El titulo admite 120 caracteres como maximo")
+        @Size(max = 255, message = "El titulo admite 255 caracteres como maximo")
         String title,
     @Size(max = 500, message = "La descripcion admite 500 caracteres como maximo")
         String description,

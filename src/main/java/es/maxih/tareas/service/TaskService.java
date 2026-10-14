@@ -72,6 +72,9 @@ public class TaskService {
     if (draft.title() == null || draft.title().isBlank()) {
       throw new TaskValidationException("El titulo es obligatorio");
     }
+    if (draft.title().length() > 255) {
+      throw new TaskValidationException("El titulo admite 255 caracteres como maximo");
+    }
     if (draft.description() != null && draft.description().length() > 500) {
       throw new TaskValidationException("La descripcion admite 500 caracteres como maximo");
     }

@@ -48,6 +48,50 @@ class TaskServiceTest {
   }
 
   @Test
+  void acceptsTitleWith255CharactersOnCreate() {
+    Task task = service.create(draft("a".repeat(255), TaskStatus.PENDING, 3));
+
+    assertEquals(255, task.title().length());
+  }
+
+  @Test
+  void rejectsTitleWith256CharactersOnCreate() {
+    TaskDraft invalid = draft("a".repeat(256), TaskStatus.PENDING, 3);
+
+    assertThrows(TaskValidationException.class, () -> service.create(invalid));
+  }
+
+  @Test
+  void acceptsTitleWith255CharactersOnUpdate() {
+    Task created = service.create(draft("Inicial", TaskStatus.PENDING, 3));
+
+    Task updated = service.update(created.id(), draft("b".repeat(255), TaskStatus.IN_PROGRESS, 3));
+
+    assertEquals(255, updated.title().length());
+  }
+
+  @Test
+  void rejectsTitleWith256CharactersOnUpdate() {
+    Task created = service.create(draft("Inicial", TaskStatus.PENDING, 3));
+    TaskDraft invalid = draft("b".repeat(256), TaskStatus.IN_PROGRESS, 3);
+
+    assertThrows(TaskValidationException.class, () -> service.update(created.id(), invalid));
+  }
+
+  @Test
+  void updateWithTooLongTitleKeepsOriginalTask() {
+    Task created = service.create(draft("Inicial", TaskStatus.PENDING, 3));
+
+    assertThrows(
+        TaskValidationException.class,
+        () -> service.update(created.id(), draft("b".repeat(256), TaskStatus.IN_PROGRESS, 4)));
+
+    Task after = service.findById(created.id());
+    assertEquals("Inicial", after.title());
+    assertEquals(TaskStatus.PENDING, after.status());
+  }
+
+  @Test
   void rejectsPriorityOutsideAllowedRange() {
     TaskDraft invalid =
         new TaskDraft("Revisar", null, TaskStatus.PENDING, 6, LocalDate.now().plusDays(1));
