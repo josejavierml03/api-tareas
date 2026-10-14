@@ -204,6 +204,16 @@ class TaskServiceTest {
     assertEquals("Prioridad baja", tasks.get(2).title());
   }
 
+  @Test
+  void breaksEqualPriorityAndDueDateTiesByTitle() {
+    LocalDate date = LocalDate.now().plusDays(1);
+    service.create(taskWithPriorityAndDueDate("Zeta", 3, date));
+    service.create(taskWithPriorityAndDueDate("Alfa", 3, date));
+
+    assertEquals(
+        List.of("Alfa", "Zeta"), service.findAll(null, null).stream().map(Task::title).toList());
+  }
+
   private TaskDraft draft(String title, TaskStatus status, int priority) {
     return new TaskDraft(title, "Descripcion", status, priority, LocalDate.now().plusDays(7));
   }
