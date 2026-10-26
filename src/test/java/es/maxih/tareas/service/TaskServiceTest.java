@@ -29,6 +29,7 @@ class TaskServiceTest {
 
     assertNotNull(task.id());
     assertEquals("Preparar la practica", task.title());
+    assertEquals(TaskStatus.PENDING, task.status());
   }
 
   @Test
