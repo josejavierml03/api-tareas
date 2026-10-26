@@ -1,5 +1,8 @@
 # API de tareas
 
+[![CI](https://github.com/josejavierml03/api-tareas/actions/workflows/ci.yml/badge.svg)](https://github.com/josejavierml03/api-tareas/actions/workflows/ci.yml)
+[![Release](https://github.com/josejavierml03/api-tareas/actions/workflows/release.yml/badge.svg)](https://github.com/josejavierml03/api-tareas/actions/workflows/release.yml)
+
 API REST en Java 21 y Spring Boot para gestionar tareas. Los datos se guardan en PostgreSQL mediante Spring Data JPA/Hibernate y sobreviven al reinicio de la aplicacion.
 
 ## Requisitos
