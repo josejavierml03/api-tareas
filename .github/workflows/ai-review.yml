@@ -1,0 +1,87 @@
+name: AI Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read        # leer el código para calcular el diff
+  pull-requests: write  # publicar el comentario con el resumen
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preparar el diff
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=50 origin "${{ github.base_ref }}"
+          git diff "origin/${{ github.base_ref }}...HEAD" > diff.txt
+          # recortamos para no pasarnos de contexto con PRs muy grandes
+          head -c 60000 diff.txt > diff-recortado.txt
+          echo "Diff completo: $(wc -c < diff.txt) bytes; enviado: $(wc -c < diff-recortado.txt) bytes"
+
+      - name: Revisar con IA (Ollama Cloud)
+        id: ia
+        continue-on-error: true
+        env:
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${OLLAMA_API_KEY:-}" ]; then
+            echo "Falta el secreto OLLAMA_API_KEY"
+            exit 1
+          fi
+          jq -Rs --arg model "gpt-oss:120b" \
+            --arg sistema "Eres un revisor de codigo. Resume en espanol, en lenguaje natural y en menos de 250 palabras, que cambia este pull request. Empieza con una frase de resumen, despues una lista de cambios agrupados por archivo o funcionalidad, y termina con riesgos o cosas a revisar. No inventes nada que no aparezca en el diff." \
+            '{model: $model, stream: false, messages: [{role: "system", content: $sistema}, {role: "user", content: ("Revisa este diff de un pull request:\n\n" + .)}]}' \
+            diff-recortado.txt > payload.json
+          curl -sS --fail-with-body --max-time 240 \
+            -H "Authorization: Bearer $OLLAMA_API_KEY" \
+            -H "Content-Type: application/json" \
+            --data @payload.json \
+            https://ollama.com/api/chat > respuesta.json
+          jq -r '.message.content // empty' respuesta.json > resumen.md
+          test -s resumen.md
+          echo "Resumen generado: $(wc -c < resumen.md) bytes"
+
+      - name: Publicar comentario
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          IA_OK: ${{ steps.ia.outcome }}
+        with:
+          script: |
+            const fs = require('fs');
+            const marcador = '<!-- ai-review -->';
+            let cuerpo = '';
+            if (process.env.IA_OK === 'success' && fs.existsSync('resumen.md')) {
+              cuerpo = fs.readFileSync('resumen.md', 'utf8').trim();
+            }
+            const cabecera = '## Revisión automática con IA\n\n';
+            const texto = cuerpo.length > 0 ? cabecera + cuerpo : cabecera + '**La IA ha fallado**';
+            const body = marcador + '\n' + texto;
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const { data: comentarios } = await github.rest.issues.listComments({
+              owner, repo, issue_number, per_page: 100,
+            });
+            const previo = comentarios.find(
+              (c) => c.user.login === 'github-actions[bot]' && c.body.includes(marcador)
+            );
+            if (previo) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: previo.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
