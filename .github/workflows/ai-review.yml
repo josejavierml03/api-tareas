@@ -42,7 +42,7 @@ jobs:
             echo "Falta el secreto OLLAMA_API_KEY"
             exit 1
           fi
-          jq -Rs --arg model "deepseek-v4.1-flash" \
+          jq -Rs --arg model "gpt-oss:120b" \
             --arg sistema "Eres un revisor de codigo. Resume en espanol, en lenguaje natural y en menos de 250 palabras, que cambia este pull request. Empieza con una frase de resumen, despues una lista de cambios agrupados por archivo o funcionalidad, y termina con riesgos o cosas a revisar. No inventes nada que no aparezca en el diff." \
             '{model: $model, stream: false, messages: [{role: "system", content: $sistema}, {role: "user", content: ("Revisa este diff de un pull request:\n\n" + .)}]}' \
             diff-recortado.txt > payload.json
