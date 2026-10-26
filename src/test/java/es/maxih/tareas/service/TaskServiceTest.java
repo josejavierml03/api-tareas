@@ -28,7 +28,7 @@ class TaskServiceTest {
     Task task = service.create(draft("Preparar la practica", TaskStatus.PENDING, 3));
 
     assertNotNull(task.id());
-    assertEquals("Preparar la practica", task.title());
+    assertEquals("Titulo incorrecto", task.title());
   }
 
   @Test
