@@ -1,0 +1,105 @@
+- name: Preparar Docker en toda la flota
+  hosts: servidores
+  become: true
+  tasks:
+    - name: Instalar Docker y dependencias Python
+      ansible.builtin.apt:
+        name: [docker.io, python3-docker, python3-requests, ca-certificates]
+        state: present
+        update_cache: true
+        cache_valid_time: 86400
+    - name: Comprobar daemon
+      ansible.builtin.command: docker info
+      register: docker_info
+      changed_when: false
+      failed_when: false
+    - name: Arrancar Docker sin systemd
+      ansible.builtin.shell: |
+        nohup dockerd --storage-driver=vfs >/var/log/dockerd.log 2>&1 </dev/null &
+        for i in $(seq 1 60); do docker info >/dev/null 2>&1 && exit 0; sleep 1; done
+        exit 1
+      when: docker_info.rc != 0
+    - name: Obtener direccion de cada servidor
+      ansible.builtin.command: hostname -i
+      register: host_address
+      changed_when: false
+    - name: Resolver la base de datos entre maquinas
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        unsafe_writes: true
+        regexp: '.*\sdb1$'
+        line: "{{ hostvars[groups['db'][0]].host_address.stdout.split()[0] }} db1"
+
+- name: Desplegar PostgreSQL
+  hosts: db
+  tasks:
+    - name: Arrancar base de datos
+      community.docker.docker_container:
+        name: tareas-db
+        image: postgres:16
+        state: started
+        restart_policy: always
+        network_mode: host
+        volumes: ["tareas-db-data:/var/lib/postgresql/data"]
+        env:
+          POSTGRES_DB: "{{ db_name }}"
+          POSTGRES_USER: "{{ db_user }}"
+          POSTGRES_PASSWORD: "{{ db_pass }}"
+        healthcheck:
+          test: [CMD-SHELL, "pg_isready -U {{ db_user }} -d {{ db_name }}"]
+          interval: 5s
+          retries: 10
+      no_log: true
+    - name: Esperar PostgreSQL
+      community.docker.docker_container_info:
+        name: tareas-db
+      register: database
+      retries: 30
+      delay: 2
+      until: database.container.State.Health.Status == 'healthy'
+      no_log: true
+
+- name: Desplegar API
+  hosts: app
+  vars:
+    version_app: "1.0.0"
+    imagen: "{{ image_repository }}:{{ version_app }}"
+  tasks:
+    - name: Exigir version trazable
+      ansible.builtin.assert:
+        that:
+          - version_app != 'latest'
+          - version_app is match('^(\d+\.\d+\.\d+|sha-[a-f0-9]+)$')
+    - name: Autenticarse si el registro es privado
+      community.docker.docker_login:
+        registry_url: ghcr.io
+        username: "{{ ghcr_user }}"
+        password: "{{ ghcr_token }}"
+      when: ghcr_token | default('') | length > 0
+      no_log: true
+    - name: Descargar version
+      community.docker.docker_image:
+        name: "{{ imagen }}"
+        source: pull
+    - name: Arrancar API
+      community.docker.docker_container:
+        name: tareas-api
+        image: "{{ imagen }}"
+        state: started
+        restart_policy: always
+        network_mode: host
+        etc_hosts:
+          db1: "{{ hostvars[groups['db'][0]].host_address.stdout.split()[0] }}"
+        env:
+          SPRING_DATASOURCE_URL: "jdbc:postgresql://db1:5432/{{ db_name }}"
+          SPRING_DATASOURCE_USERNAME: "{{ db_user }}"
+          SPRING_DATASOURCE_PASSWORD: "{{ db_pass }}"
+      no_log: true
+    - name: Verificar salud de la replica
+      ansible.builtin.uri:
+        url: http://localhost:8080/actuator/health
+        status_code: 200
+      register: salud
+      retries: 30
+      delay: 2
+      until: salud.json.status | default('DOWN') == 'UP'

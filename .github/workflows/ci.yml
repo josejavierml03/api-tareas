@@ -37,12 +37,18 @@ jobs:
       - name: Tests
         run: mvn -B verify
       - name: Publicar informe de tests
-        if: always()
+        if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
         uses: dorny/test-reporter@v3
         with:
           name: Resultados JUnit
           path: target/surefire-reports/*.xml
           reporter: java-junit
+      - name: Conservar resultados JUnit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-results
+          path: target/surefire-reports/*.xml
 
   package:
     needs: test

@@ -99,6 +99,12 @@ El hook versionado aplica Spotless antes de cada commit y vuelve a anadir los fi
 
 Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para conocer el flujo de ramas, las comprobaciones locales y la politica de Pull Requests.
 
+## Documentacion y despliegue
+
+Las memorias estan en `docs/`. Genera la web con `python -m pip install -r docs/requirements.txt` y `python docs/build.py`; abre `docs/site/index.html`. GitHub Actions publica el sitio al integrar en `main`: [memorias](https://josejavierml03.github.io/api-tareas/).
+
+Consulta [deploy/README.md](deploy/README.md) para levantar la flota SSH, desplegar una version con Ansible, repetir la ejecucion idempotente y hacer rollback. Las API del laboratorio quedan en los puertos 8081 y 8082.
+
 ## Imagen Docker
 
 ```bash

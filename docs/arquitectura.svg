@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="630" viewBox="0 0 1080 630">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0 L9 3 L0 6Z" fill="#334155"/></marker></defs>
+<rect width="1080" height="630" fill="#f8fafc"/><g font-family="sans-serif" font-size="16" fill="#0f172a">
+<text x="30" y="32" font-size="23">Boletín 6 — despliegue de un tag vX.Y.Z</text>
+<rect x="20" y="55" width="1040" height="175" rx="12" fill="#dbeafe"/><text x="35" y="82">GitHub (nube)</text>
+<text x="45" y="122">1. Repositorio / tag</text><text x="310" y="122">2. Actions publish</text><text x="600" y="122">3. GHCR: imagen X.Y.Z</text>
+<text x="320" y="188">4. Entorno produccion: aprobación de juanlaxO3</text><text x="680" y="213">Secret: VAULT_PASS</text>
+<rect x="20" y="280" width="1040" height="325" rx="12" fill="#dcfce7"/><text x="35" y="308">Ordenador físico — Docker Engine</text>
+<rect x="45" y="330" width="990" height="60" rx="8" fill="white"/><text x="60" y="356">5. Contenedor tareas-actions-runner (self-hosted): checkout + Ansible controlador</text>
+<text x="60" y="378">Descifra Vault con fichero temporal; SSH a localhost:2223, 2224 y 2225</text>
+<rect x="45" y="455" width="280" height="125" rx="8" fill="white"/><text x="60" y="481">app1: SSH 2223 → 22</text><text x="60" y="512">6. Docker interno → API</text><text x="60" y="550">HTTP host:8081 → 8080</text>
+<rect x="395" y="455" width="280" height="125" rx="8" fill="white"/><text x="410" y="481">app2: SSH 2224 → 22</text><text x="410" y="512">6. Docker interno → API</text><text x="410" y="550">HTTP host:8082 → 8080</text>
+<rect x="745" y="455" width="290" height="125" rx="8" fill="white"/><text x="760" y="481">db1: SSH 2225 → 22</text><text x="760" y="512">Docker interno → PostgreSQL</text><text x="760" y="550">TCP 5432 + volumen persistente</text>
+<text x="45" y="430">7. Ambas API descargan GHCR por HTTPS; JDBC a db1:5432; smoke test HTTP health = UP</text>
+</g><g stroke="#334155" stroke-width="2" marker-end="url(#a)"><path d="M235 116H300"/><path d="M490 116H590"/><path d="M400 135V165"/><path d="M480 330V235"/><path d="M180 390V450"/><path d="M535 390V450"/><path d="M890 390V450"/></g>
+</svg>
