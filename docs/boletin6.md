@@ -4,7 +4,8 @@
 
 | Mensaje previsto | Qué se hizo | Autor | Referencia |
 |---|---|---|---|
-| `feat(deploy): completa Pages y despliegue Ansible multi-host` | Flota, controlador, Vault, runner y automatización protegida; memorias y generador Pages | José Javier Méndez | Rama `feat/boletines-pages-ansible` (enlace al commit en el PR de esta sesión) |
+| `feat(deploy): completa Pages y despliegue Ansible multi-host` | Flota, controlador, Vault, runner y automatización protegida; memorias y generador Pages | José Javier Méndez | [d4c7d70](https://github.com/josejavierml03/api-tareas/commit/d4c7d70) |
+| `fix(devcontainer): fija Java 21 y registra pruebas de despliegue` | Entorno Java/Maven fijado y probado; smoke test, resultados de 1.1.0 y rollback, capturas y validación Pages en PR | José Javier Méndez | [PR #22](https://github.com/josejavierml03/api-tareas/pull/22) |
 
 ## Detalle del cambio
 
@@ -48,7 +49,9 @@ db1:  changed=0 unreachable=0 failed=0
 
 ![Salud real app2](capturas/b6-app2-health.png)
 
-Actualización a 1.1.0 y rollback: pendientes de registrar el resultado después de publicar la nueva imagen. No se sustituyen imágenes con la misma etiqueta para simular actualizaciones.
+Se publicó la etiqueta anotada y [Release v1.1.0](https://github.com/josejavierml03/api-tareas/releases/tag/v1.1.0). [Publish](https://github.com/josejavierml03/api-tareas/actions/runs/41254644207) terminó correctamente y generó la imagen 1.1.0. Se desplegó manualmente: `changed=2` en cada app y `changed=0` en db1. Las dos réplicas quedaron UP.
+
+Después se volvió a 1.0.0: `changed=1` en cada app, `changed=0` en db1 y **27,27 segundos** para el playbook completo, menos de un minuto. `python3 deploy/smoke.py` pasó tras actualización y rollback: crea una tarea en app1, la recupera en app2 y la elimina. Esto comprueba que ambas comparten realmente la misma base de datos. El script se añade como segundo cambio de esta sesión y solo utiliza datos temporales de prueba.
 
 ## G — Pipeline y arquitectura
 
@@ -64,4 +67,4 @@ Runner local construido con la distribución oficial Actions Runner 2.338.2, Ans
 6. Ansible inicia SSH hacia los tres servidores; sus Docker internos descargan imágenes por HTTPS y arrancan PostgreSQL y API.
 7. Las API conectan por JDBC/TCP a db1 y Ansible comprueba salud por HTTP en cada máquina.
 
-La prueba automatizada de extremo a extremo necesita el workflow integrado o etiquetado y la aprobación real del revisor. No se simula esa aprobación.
+El workflow de v1.1.0 ya llegó a `deploy`, estado **waiting**, con `produccion` y revisor `juanlaxO3`. La publicación se ejecutó en GitHub y el runner local está online. Para terminar el extremo a extremo falta que el revisor apruebe [esa ejecución](https://github.com/josejavierml03/api-tareas/actions/runs/41254644207). No se simula ni se omite esa aprobación. El PR #22 necesita revisión para integrar en main y publicar Pages.

@@ -13,6 +13,12 @@
 
 `0bdada5` cubre D–E: permite cambiar puertos del host porque 5432 estaba ocupado, manteniendo 5432/8080 dentro de los contenedores.
 
+## Verificación adicional del dev container
+
+En la sesión de cierre se construyó y arrancó el dev container con `@devcontainers/cli@0.80.1`. Se detectó que la feature Java sin versión explícita instalaba la última versión disponible; se fijaron `version=21`, `jdkDistro=tem` y Maven 3.9.9. Se añadieron los puertos alternativos al reenvío de VS Code.
+
+Se ejecutaron postCreateCommand, Docker-in-Docker y `docker compose -p boletin3-devcontainer up --build -d --wait` dentro del entorno: Java Temurin 21.0.13, Maven 3.9.9, API y PostgreSQL saludables, `curl http://localhost:18080/actuator/health` devolvió UP. La prueba fue por CLI; no se afirma haber abierto VS Code visualmente. Las primeras invocaciones de creación agotaron el timeout tras arrancar el contenedor, y se completó con `--expect-existing-container`.
+
 ## Comprobaciones realizadas
 
 - Docker Engine 29.9.0, Compose v5.6.0 y hello-world correctos. Se instaló Engine; Desktop no se ha comprobado.

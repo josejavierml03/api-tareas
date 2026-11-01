@@ -29,6 +29,8 @@ Los PR #3 y #7 se aprobaron y fusionaron con intercambio de roles: José Javier 
 
 Se creó una rama desde `b261910` con un cambio en el mismo comparador modificado por #7. El PR #13 mostró `CONFLICTING/DIRTY`. `git rebase main` produjo conflicto real; se combinaron prioridad descendente, fecha ascendente y título. Tras pasar 16 tests y `git push --force-with-lease`, pasó a `MERGEABLE`. El PR ya está fusionado.
 
+![PR #13 resuelto, revisado e integrado](capturas/b2-pr13-resuelto.png)
+
 ### F
 
 El Issue #14 y PR #15 aportan validación no trivial desde otro grupo y están cerrados/fusionados. Nuestra contribución no trivial es el PR externo #12: validar antes de mutar una entidad y devolver error de dominio ante entrada nula, con dos tests de regresión (16 tests del proyecto externo correctos). Sigue pendiente de aprobación externa. La anterior corrección de un título no se cuenta como contribución no trivial.

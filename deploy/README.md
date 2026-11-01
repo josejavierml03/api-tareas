@@ -20,6 +20,8 @@ También puedes instalar ansible-core 2.16.x y sshpass en el host y ejecutar los
 
 APIs: `http://localhost:8081` y `http://localhost:8082`. Ambas apuntan a PostgreSQL en db1. Se resuelve la IP real de db1 al desplegar y se pasa a la red host del contenedor interno; no se confunde localhost del controlador con localhost de cada servidor.
 
+Ejecuta `python3 deploy/smoke.py` para comprobar salud y persistencia compartida: crea una tarea en app1, la recupera en app2 y la elimina.
+
 ## Versiones e idempotencia
 
 Repite el playbook: debe mostrar `changed=0`. Para actualizar usa una etiqueta publicada distinta, por ejemplo `version_app=1.1.0`; para rollback vuelve a `1.0.0`. El playbook rechaza `latest` y espera salud UP en ambas réplicas.
