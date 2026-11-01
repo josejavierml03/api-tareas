@@ -2,10 +2,15 @@
   "name": "tareas-api",
   "image": "mcr.microsoft.com/devcontainers/java:21",
   "features": {
-    "ghcr.io/devcontainers/features/java:1": { "installMaven": "true" },
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21",
+      "jdkDistro": "tem",
+      "installMaven": "true",
+      "mavenVersion": "3.9.9"
+    },
     "ghcr.io/devcontainers/features/docker-in-docker:2": { "moby": false }
   },
-  "forwardPorts": [8080, 5432],
+  "forwardPorts": [8080, 5432, 18080, 15432],
   "postCreateCommand": "test -f .env || cp .env.example .env; if [ -d .githooks ]; then git config core.hooksPath .githooks; fi; mvn -B dependency:go-offline",
   "customizations": {
     "vscode": {

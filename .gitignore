@@ -2,3 +2,6 @@ target/
 *.class
 .idea/
 .env
+docs/site/
+.vault-pass
+deploy/.vault-pass

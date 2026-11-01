@@ -1,0 +1,21 @@
+name: tareas-flota
+services:
+  app1:
+    build: .
+    privileged: true
+    ports: ["127.0.0.1:2223:22", "127.0.0.1:8081:8080"]
+    volumes: ["app1-docker:/var/lib/docker"]
+  app2:
+    build: .
+    privileged: true
+    ports: ["127.0.0.1:2224:22", "127.0.0.1:8082:8080"]
+    volumes: ["app2-docker:/var/lib/docker"]
+  db1:
+    build: .
+    privileged: true
+    ports: ["127.0.0.1:2225:22"]
+    volumes: ["db1-docker:/var/lib/docker"]
+volumes:
+  app1-docker:
+  app2-docker:
+  db1-docker:
