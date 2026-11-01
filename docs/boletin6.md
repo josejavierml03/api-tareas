@@ -72,4 +72,6 @@ El workflow de v1.1.0 ya llegó a `deploy`, estado **waiting**, con `produccion`
 
 ## Verificación final de la documentación
 
+Tras aportar el estudiante `memoria-boletin1.md`, `memoria-boletin2.md` y `memoria-boletin3.md`, se incorporaron sus detalles originales, autores, prompts y declaraciones de IA a `docs/`, conservando las comprobaciones posteriores. Se actualizaron los estados antiguos de los PR y se distinguió la contribución documental externa de la no trivial. Los originales de la raíz se conservan sin modificar. Las carpetas de capturas históricas referenciadas por las memorias 1 y 2 no se han aportado todavía.
+
 La generación local produjo seis memorias y un índice; se comprobó que todos sus enlaces e imágenes locales existen. El [workflow Pages del PR](https://github.com/josejavierml03/api-tareas/actions/runs/41256112191) construyó correctamente un artefacto `github-pages` de 2.490.970 bytes y omitió el despliegue por tratarse de un PR. El CI [41256112075](https://github.com/josejavierml03/api-tareas/actions/runs/41256112075) completó lint, test y package correctamente. La publicación definitiva en Pages se dispara al fusionar en main.
