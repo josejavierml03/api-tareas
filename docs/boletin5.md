@@ -56,9 +56,9 @@ El evento es un `push` de una etiqueta que cumple el patrón `v*.*.*`, así que 
 - `type=semver,pattern={{major}}.{{minor}}` → **`1.0`** (canal de la serie 1.0; recoge parches).
 - `type=semver,pattern={{major}}` → **`1`** (canal de la versión mayor).
 - `type=sha,prefix=sha-` → **`sha-7d6242d`**, igual que antes: la trazabilidad se conserva en todas las publicaciones.
-- `type=raw,value=latest` → **`latest`**, porque la etiqueta apunta a un commit de la rama por defecto.
+- `type=raw,value=latest,enable={{is_default_branch}}` no garantiza publicar `latest` en un evento de tag; ese canal ya lo publicó el push a main.
 
-Resultado: `1.0.0`, `1.0`, `1`, `sha-7d6242d` y `latest` sobre la **misma imagen** (mismo *digest*), con cinco nombres distintos. Es la diferencia entre *versionar* (la etiqueta SemVer, que es lo que consumen las personas y los despliegues) y *trazar* (el tag `sha-`, que es lo que se usa para depurar un problema en producción).
+Resultado del tag: `1.0.0`, `1.0`, `1` y `sha-7d6242d`; `latest` procede del evento de main. Aunque el código fuente sea el mismo, no se presupone que dos builds separados tengan idéntico digest. Es la diferencia entre *versionar* (SemVer) y *trazar* (SHA).
 
 ### 2. `v1.0.0` (parte B)
 

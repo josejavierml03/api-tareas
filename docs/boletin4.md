@@ -1,5 +1,9 @@
 # Boletín 4: Integración Continua con GitHub Actions
 
+## Ampliación del cierre
+
+En [d4c7d70](https://github.com/josejavierml03/api-tareas/commit/d4c7d70), José Javier Méndez ajustó el paso del informe para que los PR desde forks no intenten escribir checks con un token de solo lectura. El resultado JUnit se conserva siempre como artefacto, incluso si no se puede publicar el check. Uso de IA: OpenCode GPT-6.1-sol, «Implementa todo lo que falta de los boletines». Se verificaron 24 tests, Spotless y los tres jobs del CI en verde en el PR #22.
+
 Repositorio: <https://github.com/josejavierml03/api-tareas>.
 
 ## Resumen de commits

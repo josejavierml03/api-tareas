@@ -2,10 +2,10 @@
 
 ## Resumen de commits
 
-| Commit | Qué se hizo | Autor | Enlace |
+| Mensaje | Qué se hizo | Autor | Enlace |
 |---|---|---|---|
-| `f8caeb5` | Actuator, JPA/PostgreSQL, Dockerfile multi-stage, Compose, entorno y tests | José Javier Méndez | [commit](https://github.com/josejavierml03/api-tareas/commit/f8caeb5) |
-| `0bdada5` | Puertos locales configurables | José Javier Méndez | [commit](https://github.com/josejavierml03/api-tareas/commit/0bdada5) |
+| `feat(docker): incorpora PostgreSQL y entorno contenerizado` | Actuator, JPA/PostgreSQL, Dockerfile multi-stage, Compose, entorno y tests | José Javier Méndez | [f8caeb5](https://github.com/josejavierml03/api-tareas/commit/f8caeb5) |
+| `fix(docker): permite configurar los puertos locales` | Puertos locales configurables | José Javier Méndez | [0bdada5](https://github.com/josejavierml03/api-tareas/commit/0bdada5) |
 
 ## Detalle y relación con el boletín
 

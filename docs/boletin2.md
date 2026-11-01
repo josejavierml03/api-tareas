@@ -4,12 +4,12 @@
 
 | Cambio | Descripción y parte | Autor del PR | Enlace |
 |---|---|---|---|
-| `6819a50` / PR #1 | README, plantillas, CODEOWNERS, CONTRIBUTING; A–B | José Javier Méndez | [PR](https://github.com/josejavierml03/api-tareas/pull/1) |
-| `b261910` / PR #3 | Búsqueda por texto; D | juanlaxO3 | [PR](https://github.com/josejavierml03/api-tareas/pull/3) |
-| `c9ebc18` / PR #7 | Orden por prioridad; D | José Javier Méndez | [PR](https://github.com/josejavierml03/api-tareas/pull/7) |
-| `5914f80` / PR #13 | Conflicto y rebase, desempate por título y test; E | José Javier Méndez | [PR](https://github.com/josejavierml03/api-tareas/pull/13) |
-| PR #15 | Validación del título desde fork; F | Ver autor en PR | [PR](https://github.com/josejavierml03/api-tareas/pull/15) |
-| `afce9d0` / PR externo #12 | Validar antes de mutar entidad, dos tests; F | José Javier Méndez | [PR externo](https://github.com/SergioAntonLopezumu/PC_26-27/pull/12) |
+| `chore(github): añade gobernanza del repositorio` (`6819a50`) | README, plantillas, CODEOWNERS, CONTRIBUTING; A–B | José Javier Méndez | [PR #1](https://github.com/josejavierml03/api-tareas/pull/1) |
+| `feat(tareas): anade el parametro q para buscar por texto` (`b261910`) | Búsqueda por texto; D | juanlaxO3 | [PR #3](https://github.com/josejavierml03/api-tareas/pull/3) |
+| `feat(tareas): ordena el listado por prioridad` (`c9ebc18`) | Orden por prioridad; D | José Javier Méndez | [PR #7](https://github.com/josejavierml03/api-tareas/pull/7) |
+| `feat(tareas): añade desempate por titulo para practicar conflicto` (`5914f80`) | Conflicto y rebase, desempate por título y test; E | José Javier Méndez | [PR #13](https://github.com/josejavierml03/api-tareas/pull/13) |
+| `fix(tareas): valida el limite de 255 caracteres en el titulo` (`24b4981`) | Validación del título desde fork; F | neri-um | [PR #15](https://github.com/josejavierml03/api-tareas/pull/15) |
+| `fix(tasks): valida antes de modificar una tarea existente` (`afce9d0`) | Validar antes de mutar entidad, dos tests; F | José Javier Méndez | [PR externo #12](https://github.com/SergioAntonLopezumu/PC_26-27/pull/12) |
 
 ## Desarrollo por partes
 

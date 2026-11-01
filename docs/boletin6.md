@@ -6,6 +6,7 @@
 |---|---|---|---|
 | `feat(deploy): completa Pages y despliegue Ansible multi-host` | Flota, controlador, Vault, runner y automatización protegida; memorias y generador Pages | José Javier Méndez | [d4c7d70](https://github.com/josejavierml03/api-tareas/commit/d4c7d70) |
 | `fix(devcontainer): fija Java 21 y registra pruebas de despliegue` | Entorno Java/Maven fijado y probado; smoke test, resultados de 1.1.0 y rollback, capturas y validación Pages en PR | José Javier Méndez | [PR #22](https://github.com/josejavierml03/api-tareas/pull/22) |
+| `docs: completa memorias y evidencias verificadas` | Ajusta tablas por commit y registra la validación final de documentación y CI | José Javier Méndez | [PR #22](https://github.com/josejavierml03/api-tareas/pull/22) |
 
 ## Detalle del cambio
 
@@ -68,3 +69,7 @@ Runner local construido con la distribución oficial Actions Runner 2.338.2, Ans
 7. Las API conectan por JDBC/TCP a db1 y Ansible comprueba salud por HTTP en cada máquina.
 
 El workflow de v1.1.0 ya llegó a `deploy`, estado **waiting**, con `produccion` y revisor `juanlaxO3`. La publicación se ejecutó en GitHub y el runner local está online. Para terminar el extremo a extremo falta que el revisor apruebe [esa ejecución](https://github.com/josejavierml03/api-tareas/actions/runs/41254644207). No se simula ni se omite esa aprobación. El PR #22 necesita revisión para integrar en main y publicar Pages.
+
+## Verificación final de la documentación
+
+La generación local produjo seis memorias y un índice; se comprobó que todos sus enlaces e imágenes locales existen. El [workflow Pages del PR](https://github.com/josejavierml03/api-tareas/actions/runs/41256112191) construyó correctamente un artefacto `github-pages` de 2.490.970 bytes y omitió el despliegue por tratarse de un PR. El CI [41256112075](https://github.com/josejavierml03/api-tareas/actions/runs/41256112075) completó lint, test y package correctamente. La publicación definitiva en Pages se dispara al fusionar en main.
