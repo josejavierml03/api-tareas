@@ -7,6 +7,8 @@
 | `feat(deploy): completa Pages y despliegue Ansible multi-host` | Flota, controlador, Vault, runner y automatización protegida; memorias y generador Pages | José Javier Méndez | [d4c7d70](https://github.com/josejavierml03/api-tareas/commit/d4c7d70) |
 | `fix(devcontainer): fija Java 21 y registra pruebas de despliegue` | Entorno Java/Maven fijado y probado; smoke test, resultados de 1.1.0 y rollback, capturas y validación Pages en PR | José Javier Méndez | [PR #22](https://github.com/josejavierml03/api-tareas/pull/22) |
 | `docs: completa memorias y evidencias verificadas` | Ajusta tablas por commit y registra la validación final de documentación y CI | José Javier Méndez | [PR #22](https://github.com/josejavierml03/api-tareas/pull/22) |
+| `fix(runner): reutiliza la configuracion al reiniciar` | Corrige la reutilización del runner y actualiza las memorias con las comprobaciones actuales | José Javier Méndez | [3f93412](https://github.com/josejavierml03/api-tareas/commit/3f93412) |
+| `docs: añade capturas reales de los boletines` | Incorpora 21 capturas de GitHub, API, Docker y pruebas de despliegue | José Javier Méndez | Rama `docs/capturas-boletines` |
 
 ## Detalle del cambio
 
