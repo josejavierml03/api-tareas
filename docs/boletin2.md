@@ -11,8 +11,7 @@ Repositorio: <https://github.com/josejavierml03/api-tareas>. Memoria integrada a
 | `feat(tareas): ordena el listado por prioridad` (`c9ebc18`) | Orden por prioridad; D | José Javier Méndez | [PR #7](https://github.com/josejavierml03/api-tareas/pull/7) |
 | `feat(tareas): añade desempate por titulo para practicar conflicto` (`5914f80`) | Conflicto y rebase, desempate por título y test; E | José Javier Méndez | [PR #13](https://github.com/josejavierml03/api-tareas/pull/13) |
 | `fix(tareas): valida el limite de 255 caracteres en el titulo` (`24b4981`) | Validación del título desde fork; F | neri-um | [PR #15](https://github.com/josejavierml03/api-tareas/pull/15) |
-| `fix(tasks): valida antes de modificar una tarea existente` (`afce9d0`) | Validar antes de mutar entidad, dos tests; F | José Javier Méndez | [PR externo #12](https://github.com/SergioAntonLopezumu/PC_26-27/pull/12) |
-| `fix(readme): corrige el titulo de la API` (`14d16be`) | Primera contribución documental desde fork, conservada como antecedente | José Javier Méndez | [PR externo #8](https://github.com/SergioAntonLopezumu/PC_26-27/pull/8) |
+| `fix(readme): corrige el titulo de la API` (`14d16be`) | Corrección documental desde fork, aprobada y fusionada; F | José Javier Méndez | [PR externo #8](https://github.com/SergioAntonLopezumu/PC_26-27/pull/8) |
 
 ## Detalle de los commits de la memoria original
 
@@ -41,7 +40,7 @@ Repositorio: <https://github.com/josejavierml03/api-tareas>. Memoria integrada a
 
 - **Qué se hizo:** corrección de `Task Manager APIAA` a `Task Manager APIA` en el fork `josejavierml03/PC_26-27`, rama `fix/readme-title`.
 - **Autor:** José Javier Méndez.
-- **Relación:** antecedente de la parte F; resolvió el Issue externo #7 mediante PR #8. El original lo dejaba pendiente, pero ahora está fusionado. Por ser un cambio de título no se cuenta como contribución no trivial; esta se completó con el PR externo #12.
+- **Relación:** parte F; resolvió el Issue externo #7 mediante PR #8 desde un fork. `SwagDogeMan` aprobó el PR, que fue fusionado el 5 de octubre de 2026. El cambio consistió en corregir un título del README; el enunciado solicita un issue no trivial, por lo que su suficiencia para ese requisito queda a criterio del profesorado.
 - **IA declarada:** OpenCode, GPT-5.6-terra, bajo la misma petición anterior. Se revisó el diff aislado y se ejecutaron 14 tests del fork correctamente.
 
 ## Desarrollo por partes
@@ -81,11 +80,11 @@ Se creó una rama desde `b261910` con un cambio en el mismo comparador modificad
 
 ### F
 
-El Issue #14 y PR #15 aportan validación no trivial desde otro grupo y están cerrados/fusionados. Nuestra contribución no trivial es el PR externo #12: validar antes de mutar una entidad y devolver error de dominio ante entrada nula, con dos tests de regresión (16 tests del proyecto externo correctos). Sigue pendiente de aprobación externa. La anterior corrección de un título no se cuenta como contribución no trivial.
+El Issue #14 y PR #15 aportan validación desde el fork de otro grupo y están cerrados/fusionados. Como evidencia de nuestra colaboración en el repositorio de otra pareja se utiliza el [PR externo #8](https://github.com/SergioAntonLopezumu/PC_26-27/pull/8), abierto desde un fork, aprobado por `SwagDogeMan` y fusionado. La modificación fue una corrección del título del README; el boletín solicita un issue no trivial.
 
 ## Uso de IA
 
-Las declaraciones originales de IA se conservan en cada detalle de commit. Para la prueba posterior de protección, el conflicto y la contribución no trivial externa se utilizó OpenCode, GPT-6.1-sol, bajo «Haz aquello que falte de la 2 y haz el boletin 3». Se verificaron resolución, diff y tests. Las revisiones externas siguen pendientes de sus propietarios.
+Las declaraciones originales de IA se conservan en cada detalle de commit. Para la prueba posterior de protección y el conflicto se utilizó OpenCode, GPT-6.1-sol, bajo «Haz aquello que falte de la 2 y haz el boletin 3». Se verificaron resolución y tests.
 
 ## Capturas de comprobación
 
@@ -97,11 +96,9 @@ Capturas actuales obtenidas el 2 de noviembre de 2026, sustituyendo las referenc
 
 ![Contribución documental histórica desde fork](capturas/b2-pr8-fork.png)
 
-El cambio documental anterior es solo un antecedente. El PR #15 demuestra la contribución de código recibida desde otro grupo, y el PR externo #12 sigue pendiente de revisión:
+El PR #15 demuestra la contribución de código recibida desde otro grupo:
 
 ![Contribución no trivial recibida desde fork](capturas/b2-pr15-fork.png)
-
-![Contribución no trivial enviada, todavía sin aprobar](capturas/b2-pr12-externo-pendiente.png)
 
 La siguiente captura muestra la salida real de la API de GitHub, presentada en una vista de evidencias (no es una captura de Settings). Incluye protección, aprobación, Code Owners y checks obligatorios:
 
