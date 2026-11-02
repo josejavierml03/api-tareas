@@ -102,4 +102,12 @@ Petición original: «Vamos a hacer el boletin1 teniendo en cuenta todo lo que d
 
 La memoria original registra JDK 21.0.12.1 y Maven 3.9.12, `mvn clean package` correcto, JAR ejecutable con dependencias y ocho tests sin fallos, errores ni omisiones. Spotless falló inicialmente en tres archivos y pasó después de aplicar el formato. El hook se ejecutó al crear `f162cc6`. Se arrancó el fat JAR, se creó una tarea por POST y se recuperó con `GET /api/tasks?status=PENDING`.
 
-Las imágenes referenciadas en el original son `capturas-boletin1/api-filtrada.png` y `capturas-boletin1/repositorio-github.png`. Esas carpetas no se han aportado todavía; quedan pendientes de adjuntar. Se han conservado sus nombres sin publicar enlaces a imágenes inexistentes.
+## Capturas de comprobación
+
+Capturas obtenidas el 2 de noviembre de 2026. Las imágenes originales no estaban disponibles; se recompiló el commit `f162cc6` en un worktree separado, pasaron sus ocho tests y se arrancó su fat JAR en el puerto 18082. Se crearon tareas con fechas futuras y se consultó el filtro PENDING. Es una repetición real de la prueba del Boletín 1, no una imagen de la sesión original.
+
+![API del commit f162cc6 consultada por estado](capturas/b1-api-filtrada-recomprobacion.png)
+
+GitHub permite consultar el snapshot histórico de ese commit, donde aparecen los once commits de la primera sesión:
+
+![Repositorio en el snapshot del Boletín 1](capturas/b1-repositorio-snapshot.png)

@@ -2,11 +2,13 @@
 
 ## Ampliación de esta sesión: partes C–D
 
-Se ha verificado la imagen `ghcr.io/josejavierml03/api-tareas:1.0.0` al descargarla en las dos máquinas app del laboratorio Ansible, conectadas por red a PostgreSQL en db1. Las dos devolvieron salud UP. Se generaron `docs/boletin1.md` a `docs/boletin6.md`, script Python `docs/build.py` y workflow oficial de Pages. Se configuró Source = GitHub Actions mediante API. La publicación debe verificarse tras integrar el PR; no se afirma que la URL esté publicada antes de esa ejecución.
+Se ha verificado la imagen `ghcr.io/josejavierml03/api-tareas:1.0.0` al descargarla en las dos máquinas app del laboratorio Ansible, conectadas por red a PostgreSQL en db1. Las dos devolvieron salud UP. Se generaron `docs/boletin1.md` a `docs/boletin6.md`, script Python `docs/build.py` y workflow oficial de Pages. Se configuró Source = GitHub Actions mediante API. El PR #22 ya está fusionado y la [ejecución de Pages 41305291783](https://github.com/josejavierml03/api-tareas/actions/runs/41305291783) terminó correctamente. La web se ha abierto y comprobado en su URL pública.
 
 El script convierte tablas, bloques de código y enlaces, genera índice y copia capturas/diagrama al sitio. `docs/site/` queda ignorado. IA: OpenCode GPT-6.1-sol, «Implementa todo lo que falta de los boletines». Se probaron build local y los despliegues reales.
 
 ![Indice HTML abierto en navegador local](capturas/b5-docs-local.png)
+
+![Documentación publicada en GitHub Pages](capturas/b5-pages-publicada.png)
 
 Nota sobre etiquetas: `latest` se habilita mediante `{{is_default_branch}}`; no debe asumirse que un evento de tag lo vuelve a publicar solo por apuntar a un commit de main. Los tags SemVer completos y SHA identifican la versión; `1`/`1.0` son canales móviles y no se usan para rollback.
 

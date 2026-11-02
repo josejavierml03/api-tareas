@@ -87,4 +87,28 @@ El Issue #14 y PR #15 aportan validación no trivial desde otro grupo y están c
 
 Las declaraciones originales de IA se conservan en cada detalle de commit. Para la prueba posterior de protección, el conflicto y la contribución no trivial externa se utilizó OpenCode, GPT-6.1-sol, bajo «Haz aquello que falte de la 2 y haz el boletin 3». Se verificaron resolución, diff y tests. Las revisiones externas siguen pendientes de sus propietarios.
 
-La memoria aportada referencia `capturas-boletin2/pr-3-fusionado.png`, `capturas-boletin2/pr-7-pendiente.png` y `capturas-boletin2/pr-8-fork.png`, pero esas imágenes todavía no están en el directorio. La segunda corresponde a un estado histórico: el PR #7 ya está fusionado. Se conserva la captura actual del PR #13 integrada arriba.
+## Capturas de comprobación
+
+Capturas actuales obtenidas el 2 de noviembre de 2026, sustituyendo las referencias a imágenes no aportadas. Los PR #3, #7 y #8 ya están fusionados; no se presenta su estado actual como si fuera el antiguo estado pendiente.
+
+![Primer ciclo de PR fusionado](capturas/b2-pr3-fusionado.png)
+
+![Segundo ciclo de PR fusionado](capturas/b2-pr7-fusionado.png)
+
+![Contribución documental histórica desde fork](capturas/b2-pr8-fork.png)
+
+El cambio documental anterior es solo un antecedente. El PR #15 demuestra la contribución de código recibida desde otro grupo, y el PR externo #12 sigue pendiente de revisión:
+
+![Contribución no trivial recibida desde fork](capturas/b2-pr15-fork.png)
+
+![Contribución no trivial enviada, todavía sin aprobar](capturas/b2-pr12-externo-pendiente.png)
+
+La siguiente captura muestra la salida real de la API de GitHub, presentada en una vista de evidencias (no es una captura de Settings). Incluye protección, aprobación, Code Owners y checks obligatorios:
+
+![Protección de main consultada mediante la API](capturas/b2-proteccion-api.png)
+
+Se repitió el intento de push con el commit temporal `6fba6c7`, basado en `main` actual y creado en un worktree separado. GitHub lo rechazó con GH006 y con la exigencia de los tres checks; el comentario de prueba nunca llegó a main:
+
+![Salida real del rechazo de push directo](capturas/b2-push-rechazado.png)
+
+La captura del PR #13 de la parte E muestra la resolución, el force-with-lease y la aprobación en su historial. El estado visual antiguo de conflicto previo al rebase no se ha recuperado.

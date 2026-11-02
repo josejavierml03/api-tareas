@@ -122,4 +122,26 @@ La suite tardó 1,96 s; las omisiones y el fallo esperado son los que marca Clic
 
 ## Uso de IA y capturas
 
-Se conservan las declaraciones originales de IA de cada commit y las pruebas posteriores de la sesión de cierre. El documento original ya está incorporado; siguen pendientes las capturas históricas que no se adjuntaron con el Markdown.
+Se conservan las declaraciones originales de IA de cada commit y las pruebas posteriores de la sesión de cierre. El documento original ya está incorporado.
+
+## Capturas de comprobación
+
+Capturas actuales del 2 de noviembre de 2026. Las salidas de comandos se muestran en una vista de evidencias con fecha y código de salida reales; no se simula una terminal ni la fecha de la sesión original.
+
+![Docker y Compose instalados y hello-world correcto](capturas/b3-instalacion-hello-world.png)
+
+![Tamaños reales de las imágenes build y runtime](capturas/b3-tamanos-imagenes.png)
+
+![Compose saludable y ejecución sin root](capturas/b3-compose-healthy.png)
+
+![Actuator devuelve UP](capturas/b3-actuator-up.png)
+
+Para obtener la evidencia de persistencia se repitió el experimento en un proyecto aislado `boletin3-capturas`, puertos 18084/15434: POST 201, mismo ID tras down/up y lista vacía tras down -v/up. Después se limpiaron solo los contenedores y volúmenes de esa prueba:
+
+![Persistencia comprobada con ambos modos de down](capturas/b3-persistencia.png)
+
+![Imagen publicada en Docker Hub](capturas/b3-dockerhub-publicada.png)
+
+Los tests de Click se repitieron sobre el mismo commit con el código montado desde `/tmp/opencode/click`: **628 passed, 21 skipped, 1 xfailed en 2,72 s** (salida 0). Este tiempo corresponde a la repetición, frente a 1,96 s de la ejecución original:
+
+![Tests reales de Click dentro de Docker](capturas/b3-click-tests.png)
