@@ -17,6 +17,7 @@ Repositorio: <https://github.com/josejavierml03/api-tareas>. Memoria integrada a
 - **Autor:** José Javier Méndez.
 - **Relación:** partes B–G.
 - **IA:** OpenCode, GPT-6.1-sol. Petición: «Haz aquello que falte de la 2 y haz el boletin 3. Dame los comandos a ejecutar para instalar docker». Artefactos revisados y comprobaciones Maven y Docker ejecutadas.
+- **Alcance de la consulta (elaboración, no cita literal):** adaptar la API existente al boletín Docker, teniendo en cuenta que originalmente usaba un mapa en memoria. Se pidió preparar el endpoint de salud, una imagen multi-stage, PostgreSQL con persistencia mediante JPA, Compose con comprobaciones de salud, variables de entorno, documentación y un dev container, y proporcionar los comandos de instalación para Ubuntu.
 
 ### 2. `fix(docker): permite configurar los puertos locales`
 
@@ -24,6 +25,7 @@ Repositorio: <https://github.com/josejavierml03/api-tareas>. Memoria integrada a
 - **Autor:** José Javier Méndez.
 - **Relación:** partes D–E, configuración local sin cambios de código; 5432 estaba ocupado y se utilizaron 15432/18080.
 - **IA:** OpenCode, GPT-6.1-sol, continuación tras «Listo». Se validaron configuración y arranque saludable.
+- **Contexto de la continuación:** tras instalar Docker se solicitó continuar con las pruebas del boletín. Al encontrar el puerto PostgreSQL ocupado, se adaptó Compose para permitir puertos locales configurables y se verificó el arranque de la API y la base de datos.
 
 ## Descripción de la sesión
 

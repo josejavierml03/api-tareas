@@ -100,6 +100,8 @@ Se comprobaron `mvn clean package`, `mvn test`, `mvn spotless:check` y el arranq
 
 Petición original: «Vamos a hacer el boletin1 teniendo en cuenta todo lo que dice el boletin0».
 
+**Contexto y alcance de la consulta (explicación elaborada, no cita literal):** se pidió que se interpretaran conjuntamente la guía de entrega y el boletín de Git y Maven para preparar una API REST de tareas con Java 21 y Spring Boot. El trabajo incluía generar el CRUD con validaciones, separación en capas y tests de reglas de negocio; configurar Maven y archivos compartidos del repositorio; practicar ramas, commits y resolución de un conflicto; y añadir Spotless con un hook versionado. También se solicitó tener en cuenta la documentación de los commits y la declaración del uso de IA exigidas por la guía.
+
 La memoria original registra JDK 21.0.12.1 y Maven 3.9.12, `mvn clean package` correcto, JAR ejecutable con dependencias y ocho tests sin fallos, errores ni omisiones. Spotless falló inicialmente en tres archivos y pasó después de aplicar el formato. El hook se ejecutó al crear `f162cc6`. Se arrancó el fat JAR, se creó una tarea por POST y se recuperó con `GET /api/tasks?status=PENDING`.
 
 ## Capturas de comprobación
