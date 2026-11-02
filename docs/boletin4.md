@@ -26,6 +26,7 @@ Los commits 1, 2, 3 y 5 son los *squash* fusionados en `main`; el 4 no llegó a 
 - **Autor:** Juan Antonio.
 - **Relación con el boletín:** parte A.
 - **Uso de IA:** OpenCode, modelo MiMo-V2.6-Pro. Petición: «Workflow de un solo job». Se comprobó en local `mvn -B verify` (24 tests) y `mvn -B spotless:check` antes de abrir el [PR #16](https://github.com/josejavierml03/api-tareas/pull/16).
+- **Alcance de la consulta (elaboración, no cita literal):** crear un primer workflow de GitHub Actions que se active en los eventos del boletín, prepare JDK 21 y Maven con caché, ejecute la verificación del proyecto y limite sus permisos. También se revisó cómo usar `concurrency` para cancelar ejecuciones obsoletas.
 - **Verificado:** run [40376918024](https://github.com/josejavierml03/api-tareas/actions/runs/40376918024) en verde en 26 s.
 
 ![PR 16 fusionado](capturas/b4-a-pr-16-merged.png)
@@ -56,6 +57,7 @@ Los commits 1, 2, 3 y 5 son los *squash* fusionados en `main`; el 4 no llegó a 
 - **Autor:** Juan Antonio.
 - **Relación con el boletín:** parte C.
 - **Uso de IA:** OpenCode, MiMo-V2.6-Pro. Petición: «Reestructura el workflow». El workflow copia la estructura que pide el enunciado, incluidos los comentarios explicativos del bloque `permissions`.
+- **Alcance de la consulta (elaboración, no cita literal):** separar formato, tests y empaquetado en los jobs `lint`, `test` y `package`, conectarlos mediante `needs`, publicar los resultados JUnit y guardar el JAR. La práctica incluía observar que un fallo de formato detiene los jobs posteriores y corregirlo después.
 - **Verificado:**
   - Run rojo [40378550344](https://github.com/josejavierml03/api-tareas/actions/runs/40378550344): `lint` falla con `The following files had format violations: src/main/java/es/maxih/tareas/domain/Task.java` y `test` y `package` quedan en **skipped**.
   - Run verde [40378696333](https://github.com/josejavierml03/api-tareas/actions/runs/40378696333): `lint`, `test` y `package` correctos en 54 s, informe JUnit con **24 passed, 0 failed and 0 skipped** y artefacto `app-jar` de 47,4 MB.
@@ -131,6 +133,7 @@ También se comprobó la opción *Require branches to be up to date before mergi
 - **Autor:** Juan Antonio.
 - **Relación con el boletín:** parte E (gestión de secretos y badge del CI).
 - **Uso de IA:** OpenCode, MiMo-V2.6-Pro. Petición: «Workflow de revisión con IA en cada PR, con el token en secretos y "La IA ha fallado" si hay error». El resumen del PR lo genera a su vez otra IA (`gpt-oss:120b` de Ollama Cloud) a partir del diff.
+- **Alcance de la consulta (elaboración, no cita literal):** automatizar un resumen legible de los cambios de cada PR, obtener el token de un secreto de GitHub Actions, actualizar el comentario existente y mostrar el mensaje de fallo indicado cuando la llamada no funcione. Se añadieron también badges al README.
 
 ![Comentario de la revisión con IA en el PR 21](capturas/b4-e-ia-comentario.png)
 
