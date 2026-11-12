@@ -12,9 +12,7 @@
 
 ## Detalle del cambio
 
-La sesión añade los archivos de `deploy/`, amplía Release con `needs: publish`, entorno `produccion` y runner self-hosted, y publica las memorias desde `docs/`. Se revisaron los cambios y se probaron el despliegue y la idempotencia. IA: OpenCode, GPT-6.1-sol, petición «Implementa todo lo que falta de los boletines».
-
-**Alcance de la consulta (elaboración, no cita literal):** revisar los boletines y el estado real de GitHub antes de completar el trabajo pendiente. Para el despliegue se preparó una flota de dos servidores de aplicación y uno de base de datos, inventario, playbook y Vault; se conectó el despliegue a la publicación de versiones mediante un runner autoalojado y un entorno con revisión. La comprobación incluyó salud, persistencia compartida, idempotencia, actualización y rollback, documentando las aprobaciones que debían realizar otras personas.
+**Uso de IA:** se utilizó OpenCode, GPT-6.1-sol, para revisar el estado de los boletines y asistir en la preparación de la flota de servidores, el inventario, el playbook y Vault. También se amplió el workflow de Release con un runner autoalojado y un entorno protegido. Se revisaron los cambios y se comprobaron la salud, la persistencia compartida, la idempotencia, la actualización y el rollback. Las aprobaciones necesarias se documentaron y realizaron mediante GitHub.
 
 ## A — Dependencias reproducibles
 
@@ -92,6 +90,4 @@ Tras aportar el estudiante `memoria-boletin1.md`, `memoria-boletin2.md` y `memor
 
 La generación local produjo seis memorias y un índice; se comprobó que todos sus enlaces e imágenes locales existen. El [workflow Pages del PR](https://github.com/josejavierml03/api-tareas/actions/runs/41256112191) construyó correctamente un artefacto `github-pages` de 2.490.970 bytes y omitió el despliegue por tratarse de un PR. El CI [41256112075](https://github.com/josejavierml03/api-tareas/actions/runs/41256112075) completó lint, test y package correctamente. Tras fusionar #22, Pages se publicó correctamente con la ejecución 41305291783.
 
-**IA de la sesión de capturas y corrección del reinicio:** OpenCode, GPT-6.1-sol. Petición: «Obten las capturas, y que mas falta?». Se obtuvieron imágenes de páginas reales y salidas reales de comandos; se probaron bash -n, reinicio del runner, despliegue automático y smoke test.
-
-**Alcance de la consulta (elaboración, no cita literal):** obtener evidencias de los ejercicios que podían repetirse o consultarse, distinguir las capturas actuales de las históricas y revisar los PR y ejecuciones pendientes. Durante la comprobación se detectó y corrigió que el runner intentaba registrarse de nuevo al reiniciar; después se verificaron el despliegue y la comunicación entre réplicas.
+**Uso de IA para las evidencias y la corrección del runner:** OpenCode, GPT-6.1-sol, asistió en la recopilación de capturas de páginas y salidas reales, diferenciando las comprobaciones actuales de las históricas. Durante la revisión se corrigió el intento de registrar de nuevo el runner al reiniciar; se verificaron la sintaxis del script, el reinicio, el despliegue automático y la comunicación entre réplicas.

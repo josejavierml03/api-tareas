@@ -25,8 +25,7 @@ Los commits 1, 2, 3 y 5 son los *squash* fusionados en `main`; el 4 no llegó a 
 - **Qué se hizo:** se creó `.github/workflows/ci.yml` con un único job `build` que hace checkout, configura JDK 21 (Temurin) con caché de Maven y ejecuta `mvn --batch-mode verify`. Se ejecuta en cada push a `main` y en cada pull request. Se añadieron `concurrency` (agrupado por `github.ref` con `cancel-in-progress`) para cancelar ejecuciones obsoletas de la misma rama y `permissions: contents: read`, que es todo lo que necesita.
 - **Autor:** Juan Antonio.
 - **Relación con el boletín:** parte A.
-- **Uso de IA:** OpenCode, modelo MiMo-V2.6-Pro. Petición: «Workflow de un solo job». Se comprobó en local `mvn -B verify` (24 tests) y `mvn -B spotless:check` antes de abrir el [PR #16](https://github.com/josejavierml03/api-tareas/pull/16).
-- **Alcance de la consulta (elaboración, no cita literal):** crear un primer workflow de GitHub Actions que se active en los eventos del boletín, prepare JDK 21 y Maven con caché, ejecute la verificación del proyecto y limite sus permisos. También se revisó cómo usar `concurrency` para cancelar ejecuciones obsoletas.
+- **Uso de IA:** OpenCode, modelo MiMo-V2.6-Pro, asistió en la creación del primer workflow de GitHub Actions: eventos de ejecución, JDK 21, caché de Maven, verificación, permisos y cancelación de ejecuciones obsoletas. Antes de abrir el [PR #16](https://github.com/josejavierml03/api-tareas/pull/16) se comprobaron `mvn -B verify` y `mvn -B spotless:check`.
 - **Verificado:** run [40376918024](https://github.com/josejavierml03/api-tareas/actions/runs/40376918024) en verde en 26 s.
 
 ![PR 16 fusionado](capturas/b4-a-pr-16-merged.png)
@@ -56,8 +55,7 @@ Los commits 1, 2, 3 y 5 son los *squash* fusionados en `main`; el 4 no llegó a 
   - `4e61e70` — aplica `mvn spotless:apply` y recupera el formato.
 - **Autor:** Juan Antonio.
 - **Relación con el boletín:** parte C.
-- **Uso de IA:** OpenCode, MiMo-V2.6-Pro. Petición: «Reestructura el workflow». El workflow copia la estructura que pide el enunciado, incluidos los comentarios explicativos del bloque `permissions`.
-- **Alcance de la consulta (elaboración, no cita literal):** separar formato, tests y empaquetado en los jobs `lint`, `test` y `package`, conectarlos mediante `needs`, publicar los resultados JUnit y guardar el JAR. La práctica incluía observar que un fallo de formato detiene los jobs posteriores y corregirlo después.
+- **Uso de IA:** OpenCode, MiMo-V2.6-Pro, asistió en la separación del workflow en `lint`, `test` y `package`, sus dependencias `needs`, el informe JUnit y la publicación del JAR. La estructura se contrastó con el enunciado y se comprobó el comportamiento ante un fallo de formato.
 - **Verificado:**
   - Run rojo [40378550344](https://github.com/josejavierml03/api-tareas/actions/runs/40378550344): `lint` falla con `The following files had format violations: src/main/java/es/maxih/tareas/domain/Task.java` y `test` y `package` quedan en **skipped**.
   - Run verde [40378696333](https://github.com/josejavierml03/api-tareas/actions/runs/40378696333): `lint`, `test` y `package` correctos en 54 s, informe JUnit con **24 passed, 0 failed and 0 skipped** y artefacto `app-jar` de 47,4 MB.
@@ -132,8 +130,7 @@ También se comprobó la opción *Require branches to be up to date before mergi
   Se añadieron además los badges de `ci.yml` y `release.yml` al README. Los commits internos fueron `bc0ff84` (workflow y badges) y `eecbc29` (cambio de modelo a uno gratuito).
 - **Autor:** Juan Antonio.
 - **Relación con el boletín:** parte E (gestión de secretos y badge del CI).
-- **Uso de IA:** OpenCode, MiMo-V2.6-Pro. Petición: «Workflow de revisión con IA en cada PR, con el token en secretos y "La IA ha fallado" si hay error». El resumen del PR lo genera a su vez otra IA (`gpt-oss:120b` de Ollama Cloud) a partir del diff.
-- **Alcance de la consulta (elaboración, no cita literal):** automatizar un resumen legible de los cambios de cada PR, obtener el token de un secreto de GitHub Actions, actualizar el comentario existente y mostrar el mensaje de fallo indicado cuando la llamada no funcione. Se añadieron también badges al README.
+- **Uso de IA:** OpenCode, MiMo-V2.6-Pro, asistió en el workflow que resume cambios de PR, obtiene el token desde un secreto, actualiza el comentario y comunica los fallos. El propio resumen se genera con `gpt-oss:120b` de Ollama Cloud a partir del diff. También se añadieron badges al README.
 
 ![Comentario de la revisión con IA en el PR 21](capturas/b4-e-ia-comentario.png)
 

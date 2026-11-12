@@ -4,9 +4,7 @@
 
 Se ha verificado la imagen `ghcr.io/josejavierml03/api-tareas:1.0.0` al descargarla en las dos máquinas app del laboratorio Ansible, conectadas por red a PostgreSQL en db1. Las dos devolvieron salud UP. Se generaron `docs/boletin1.md` a `docs/boletin6.md`, script Python `docs/build.py` y workflow oficial de Pages. Se configuró Source = GitHub Actions mediante API. El PR #22 ya está fusionado y la [ejecución de Pages 41305291783](https://github.com/josejavierml03/api-tareas/actions/runs/41305291783) terminó correctamente. La web se ha abierto y comprobado en su URL pública.
 
-El script convierte tablas, bloques de código y enlaces, genera índice y copia capturas/diagrama al sitio. `docs/site/` queda ignorado. IA: OpenCode GPT-6.1-sol, «Implementa todo lo que falta de los boletines». Se probaron build local y los despliegues reales.
-
-**Alcance de la consulta (elaboración, no cita literal):** revisar las memorias disponibles, incorporarlas a `docs/` y generar una web navegable con un índice y una página por boletín. Se preparó además un workflow con las acciones oficiales de GitHub Pages y se comprobó localmente que se copiaban las capturas y que los enlaces funcionaban.
+El script convierte tablas, bloques de código y enlaces, genera índice y copia capturas y diagramas al sitio. `docs/site/` queda ignorado. Se empleó OpenCode GPT-6.1-sol para integrar las memorias disponibles en `docs/`, preparar la generación de la web y configurar su publicación con las acciones oficiales de GitHub Pages. Se comprobaron localmente las capturas y los enlaces y se verificó el despliegue.
 
 ![Indice HTML abierto en navegador local](capturas/b5-docs-local.png)
 
@@ -76,8 +74,7 @@ Resultado del tag: `1.0.0`, `1.0`, `1` y `sha-7d6242d`; `latest` procede del eve
   El push de la etiqueta disparó de nuevo `release.yml` y publicó la imagen con los tags SemVer. Después se creó la **Release** de GitHub a partir de esa etiqueta, con título, notas generadas automáticamente por GitHub y el enlace al cambio.
 - **Autor:** Juan Antonio.
 - **Relación con el boletín:** parte B.
-- **Uso de IA:** OpenCode, MiMo-V2.6-Pro. Petición: «Etiqueta v1.0.0 y release». La release se creó con `gh release create v1.0.0 --verify-tag --generate-notes`.
-- **Alcance de la consulta (elaboración, no cita literal):** crear y publicar una etiqueta anotada `v1.0.0`, comprobar que el workflow de Release se disparaba y generaba etiquetas SemVer y SHA en GHCR, y crear la Release de GitHub con notas generadas.
+- **Uso de IA:** OpenCode, MiMo-V2.6-Pro, asistió en la creación de la etiqueta anotada `v1.0.0`, la comprobación de los tags SemVer y SHA en GHCR y la preparación de la Release con notas generadas. La Release se creó con `gh release create v1.0.0 --verify-tag --generate-notes`.
 - **Verificado:** run [40386370211](https://github.com/josejavierml03/api-tareas/actions/runs/40386370211) en verde. Tags publicados: `1.0.0`, `1.0`, `1`, `sha-7d6242d` y `latest`. Release: <https://github.com/josejavierml03/api-tareas/releases/tag/v1.0.0>.
 
 ![Release v1.0.0](capturas/b5-b-release-v1.0.0.png)
