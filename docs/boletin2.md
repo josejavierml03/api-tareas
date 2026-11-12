@@ -20,31 +20,28 @@ Repositorio: <https://github.com/josejavierml03/api-tareas>. Memoria integrada a
 - **Qué se hizo:** plantilla de PR, plantillas bug/enhancement, CODEOWNERS para ambos compañeros, CONTRIBUTING y README con clonado, requisitos, compilación, arranque y hooks.
 - **Autor:** José Javier Méndez.
 - **Relación:** partes A–B; seis archivos integrados por squash como [37eb919](https://github.com/josejavierml03/api-tareas/commit/37eb91998e842f5313125a0445a85822b3b415b7) tras aprobación de `juanlaxO3`.
-- **IA declarada en el original:** OpenCode, GPT-5.6-terra. Petición: «Dentro de la carpeta api-tareas, haz las tres primeras partes del boletin». Se revisaron archivos, colaboradores y configuración remota.
-- **Alcance de la consulta (elaboración, no cita literal):** examinar el estado del repositorio y completar las partes A–C: publicación, preparación de README y gobernanza mediante plantillas, etiquetas, CODEOWNERS y CONTRIBUTING, y protección de `main` con revisión obligatoria. Comprobar el acceso y explicar las acciones que requiriesen intervención de la pareja.
+- **Uso de IA:** OpenCode, GPT-5.6-terra, se utilizó para examinar el repositorio y asistir en las partes A–C: publicación, documentación, plantillas, etiquetas, CODEOWNERS y protección de `main`. Se revisaron los archivos, los colaboradores y la configuración remota.
 
 ### 2. `feat(tareas): anade el parametro q para buscar por texto`
 
 - **Qué se hizo:** `q` busca sin distinguir mayúsculas en título y descripción y combina con `status`. Se unificó la consulta en `findAll(TaskStatus status, String query)`, se añadieron seis tests y se actualizó README.
 - **Autor:** Juan Antonio Cortado Lax (`juanlaxO3`). Commit de desarrollo [aacf565](https://github.com/josejavierml03/api-tareas/commit/aacf565737f5651f815ec0fbfd1d1793963dce92), integrado como `b261910`.
 - **Relación:** parte D, Issue #2 y PR #3 con plantilla y revisión de José Javier.
-- **IA declarada:** OpenCode, modelo big-pickle. El original no especifica el prompt de este cambio; queda pendiente completarlo por su autor.
-- **Contexto del trabajo documentado:** la mejora consistió en incorporar la búsqueda opcional `q`, combinable con el filtro de estado, y verificarla con tests. Esta descripción resume el cambio; no pretende reconstruir la consulta exacta de Juan Antonio.
+- **Uso de IA:** el autor declaró el uso de OpenCode con el modelo big-pickle como apoyo para el cambio de búsqueda por texto y sus pruebas. La memoria original no recoge la consulta exacta.
 
 ### 3. `feat(tareas): ordena el listado por prioridad`
 
 - **Qué se hizo:** prioridad descendente, fecha ascendente como desempate, test de ambas reglas y README actualizado.
 - **Autor:** José Javier Méndez. Commit de desarrollo [bc90922](https://github.com/josejavierml03/api-tareas/commit/bc90922), integrado como `c9ebc18`.
 - **Relación:** parte D con roles invertidos; Issue #6 con etiqueta enhancement y PR #7 desde `feat/orden-prioridad`, aprobado por Juan Antonio.
-- **IA declarada:** OpenCode, GPT-5.6-terra. Petición: «Revisa el directorio, y haz las partes que falten del segundo boletin». Se revisaron código, test y `mvn clean package`.
-- **Alcance de la consulta (elaboración, no cita literal):** identificar los ejercicios pendientes de colaboración y preparar una mejora verificable para la API. Para este PR se desarrolló el orden por prioridad y fecha, con un test, documentación e Issue asociado, siguiendo el flujo de revisión de la pareja.
+- **Uso de IA:** OpenCode, GPT-5.6-terra, se empleó para identificar actividades pendientes y preparar una mejora verificable: la ordenación por prioridad y fecha, acompañada de pruebas, documentación e Issue. Se revisaron el código, el test y el resultado de `mvn clean package`.
 
 ### 4. `fix(readme): corrige el titulo de la API`
 
 - **Qué se hizo:** corrección de `Task Manager APIAA` a `Task Manager APIA` en el fork `josejavierml03/PC_26-27`, rama `fix/readme-title`.
 - **Autor:** José Javier Méndez.
 - **Relación:** parte F; resolvió el Issue externo #7 mediante PR #8 desde un fork. `SwagDogeMan` aprobó el PR, que fue fusionado el 5 de octubre de 2026. El cambio consistió en corregir un título del README; el enunciado solicita un issue no trivial, por lo que su suficiencia para ese requisito queda a criterio del profesorado.
-- **IA declarada:** OpenCode, GPT-5.6-terra, bajo la misma petición anterior. Se revisó el diff aislado y se ejecutaron 14 tests del fork correctamente.
+- **Uso de IA:** OpenCode, GPT-5.6-terra, asistió en la corrección del título y la preparación de la contribución desde el fork. Se revisó el diff y se ejecutaron 14 tests del proyecto.
 
 ## Desarrollo por partes
 
@@ -87,9 +84,7 @@ El Issue #14 y PR #15 aportan validación desde el fork de otro grupo y están c
 
 ## Uso de IA
 
-Las declaraciones originales de IA se conservan en cada detalle de commit. Para la prueba posterior de protección y el conflicto se utilizó OpenCode, GPT-6.1-sol, bajo «Haz aquello que falte de la 2 y haz el boletin 3». Se verificaron resolución y tests.
-
-**Contexto y alcance de esa petición (elaboración, no cita literal):** revisar qué actividades del segundo boletín seguían abiertas, comprobar que GitHub rechazaba un push directo a `main` y practicar un conflicto real entre cambios del mismo comparador. La asistencia incluyó resolver el rebase conservando ambas reglas de ordenación, añadir una prueba y documentar el estado de los PR; se mantuvieron separadas las aprobaciones que correspondían a otras personas.
+Para la comprobación posterior de protección y la resolución del conflicto se utilizó OpenCode, GPT-6.1-sol. La asistencia comprendió revisar las actividades pendientes, comprobar el rechazo de un push directo y resolver el rebase conservando ambas reglas de ordenación. Se añadió una prueba y se verificaron el resultado y el estado de los PR. Las aprobaciones fueron realizadas por las personas correspondientes.
 
 ## Capturas de comprobación
 
