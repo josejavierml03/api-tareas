@@ -12,9 +12,9 @@
 
 ## Detalle del cambio
 
-La sesión añade los archivos de `deploy/`, amplía Release con `needs: publish`, entorno `produccion` y runner self-hosted, y publica las memorias desde `docs/`. Se revisaron los cambios y se probaron el despliegue y la idempotencia. IA: OpenCode, GPT-6.1-sol, petición «Implementa todo lo que falta de los boletines».
+La sesión añade los archivos de `deploy/`, amplía Release con `needs: publish`, entorno `produccion` y runner self-hosted, y publica las memorias desde `docs/`. Se utilizó OpenCode, GPT-6.1-sol; se revisaron los cambios y se probaron el despliegue y la idempotencia.
 
-**Alcance de la consulta (elaboración, no cita literal):** revisar los boletines y el estado real de GitHub antes de completar el trabajo pendiente. Para el despliegue se preparó una flota de dos servidores de aplicación y uno de base de datos, inventario, playbook y Vault; se conectó el despliegue a la publicación de versiones mediante un runner autoalojado y un entorno con revisión. La comprobación incluyó salud, persistencia compartida, idempotencia, actualización y rollback, documentando las aprobaciones que debían realizar otras personas.
+**Trabajo realizado:** se revisaron los boletines y el estado de GitHub. Se preparó una flota de dos servidores de aplicación y uno de base de datos, inventario, playbook y Vault; se conectó el despliegue a la publicación de versiones mediante un runner autoalojado y un entorno con revisión. Se comprobaron salud, persistencia compartida, idempotencia, actualización y rollback.
 
 ## A — Dependencias reproducibles
 
@@ -92,6 +92,6 @@ Tras aportar el estudiante `memoria-boletin1.md`, `memoria-boletin2.md` y `memor
 
 La generación local produjo seis memorias y un índice; se comprobó que todos sus enlaces e imágenes locales existen. El [workflow Pages del PR](https://github.com/josejavierml03/api-tareas/actions/runs/41256112191) construyó correctamente un artefacto `github-pages` de 2.490.970 bytes y omitió el despliegue por tratarse de un PR. El CI [41256112075](https://github.com/josejavierml03/api-tareas/actions/runs/41256112075) completó lint, test y package correctamente. Tras fusionar #22, Pages se publicó correctamente con la ejecución 41305291783.
 
-**IA de la sesión de capturas y corrección del reinicio:** OpenCode, GPT-6.1-sol. Petición: «Obten las capturas, y que mas falta?». Se obtuvieron imágenes de páginas reales y salidas reales de comandos; se probaron bash -n, reinicio del runner, despliegue automático y smoke test.
+**IA de la sesión de capturas y corrección del reinicio:** OpenCode, GPT-6.1-sol. Se obtuvieron imágenes de páginas reales y salidas reales de comandos; se probaron bash -n, reinicio del runner, despliegue automático y smoke test.
 
-**Alcance de la consulta (elaboración, no cita literal):** obtener evidencias de los ejercicios que podían repetirse o consultarse, distinguir las capturas actuales de las históricas y revisar los PR y ejecuciones pendientes. Durante la comprobación se detectó y corrigió que el runner intentaba registrarse de nuevo al reiniciar; después se verificaron el despliegue y la comunicación entre réplicas.
+**Trabajo realizado:** se obtuvieron evidencias de los ejercicios, se distinguieron las capturas actuales de las históricas y se revisaron los PR y ejecuciones pendientes. Se corrigió el registro repetido del runner al reiniciar y se verificaron el despliegue y la comunicación entre réplicas.

@@ -16,15 +16,15 @@ Repositorio: <https://github.com/josejavierml03/api-tareas>. Memoria integrada a
 - **Qué se hizo:** Actuator y Spring Data JPA, driver PostgreSQL, entidad persistente y adaptador que conserva el contrato del repositorio. Dockerfile multi-stage, Compose, `.dockerignore`, `.env.example`, propiedades y dev container. El servicio real usa JPA y los tests de negocio memoria. Se añadieron tres tests unitarios de conversión de campos y eliminación de entidades existentes/ausentes.
 - **Autor:** José Javier Méndez.
 - **Relación:** partes B–G.
-- **IA:** OpenCode, GPT-6.1-sol. Petición: «Haz aquello que falte de la 2 y haz el boletin 3. Dame los comandos a ejecutar para instalar docker». Artefactos revisados y comprobaciones Maven y Docker ejecutadas.
-- **Alcance de la consulta (elaboración, no cita literal):** adaptar la API existente al boletín Docker, teniendo en cuenta que originalmente usaba un mapa en memoria. Se pidió preparar el endpoint de salud, una imagen multi-stage, PostgreSQL con persistencia mediante JPA, Compose con comprobaciones de salud, variables de entorno, documentación y un dev container, y proporcionar los comandos de instalación para Ubuntu.
+- **Uso de IA:** OpenCode, GPT-6.1-sol. Los artefactos se revisaron y se ejecutaron comprobaciones Maven y Docker.
+- **Trabajo realizado:** se adaptó la API existente, que usaba un mapa en memoria, con endpoint de salud, imagen multi-stage, persistencia JPA/PostgreSQL, Compose, variables de entorno, documentación y dev container. También se proporcionaron los comandos de instalación de Docker para Ubuntu.
 
 ### 2. `fix(docker): permite configurar los puertos locales`
 
 - **Qué se hizo:** variables `POSTGRES_PORT` y `API_PORT` en Compose, plantilla y documentación, con valores predeterminados 5432/8080.
 - **Autor:** José Javier Méndez.
 - **Relación:** partes D–E, configuración local sin cambios de código; 5432 estaba ocupado y se utilizaron 15432/18080.
-- **IA:** OpenCode, GPT-6.1-sol, continuación tras «Listo». Se validaron configuración y arranque saludable.
+- **Uso de IA:** OpenCode, GPT-6.1-sol. Se validaron la configuración y el arranque saludable.
 - **Contexto de la continuación:** tras instalar Docker se solicitó continuar con las pruebas del boletín. Al encontrar el puerto PostgreSQL ocupado, se adaptó Compose para permitir puertos locales configurables y se verificó el arranque de la API y la base de datos.
 
 ## Descripción de la sesión
